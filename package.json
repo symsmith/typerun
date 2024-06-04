@@ -1,0 +1,15 @@
+{
+	"name": "validator",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "tsc --watch --noEmit",
+		"build": "tsc",
+		"test": "bun ./test/index.ts"
+	},
+	"devDependencies": {
+		"typescript": "^5.4.5"
+	},
+	"license": "ISC"
+}
