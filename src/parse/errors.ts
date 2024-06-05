@@ -12,6 +12,13 @@ const validationError: Omit<ParseError, "message"> = {
 	name: "ValidationError",
 };
 
+export function getValidationErrorMessage(
+	value: unknown,
+	expectedType: string
+) {
+	return `Value \`${JSON.stringify(value)}\` is not ${expectedType}`;
+}
+
 export function getValidationError(message: string): ParseError {
 	return { ...validationError, message };
 }
