@@ -9,6 +9,7 @@ import {
 	optional,
 	record,
 	string,
+	tuple,
 } from "validator/schema";
 
 describe("object", () => {
@@ -64,5 +65,27 @@ describe("record", () => {
 	test("should fail an object with a bad key", () => {
 		const schema = record({ k: either(literal("a"), literal("b")), v: number });
 		expect(isOk(validate(schema)({ a: 1, b: 2, c: 3 }))).toBe(false);
+	});
+});
+
+describe("tuple", () => {
+	test("should validate an array with the correct elements", () => {
+		const schema = tuple(number, number, string);
+		expect(isOk(validate(schema)([1, 2, "hello"]))).toBe(true);
+	});
+
+	test("should fail an array with the wrong number of elements", () => {
+		const schema = tuple(number, number, string);
+		expect(isOk(validate(schema)([1, 2]))).toBe(false);
+	});
+
+	test("should fail an array with a bad element", () => {
+		const schema = tuple(number, number, string);
+		expect(isOk(validate(schema)([1, 2, 3]))).toBe(false);
+	});
+
+	test("should fail for something other than an array", () => {
+		const schema = tuple(number, number, string);
+		expect(isOk(validate(schema)(true))).toBe(false);
 	});
 });
