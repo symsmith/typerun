@@ -6,14 +6,12 @@ import { err, isErr, ok } from "../../result/index";
 import { string } from "../primitive/string";
 import type { Schema } from "../types";
 
-export function record<V extends any>(
-	valuesSchema: Schema<V>
-): Schema<Record<string, V>>;
-export function record<V extends any, K extends string = string>(schemas: {
+export function record<V>(valuesSchema: Schema<V>): Schema<Record<string, V>>;
+export function record<V, K extends string>(schemas: {
 	k: Schema<K>;
 	v: Schema<V>;
 }): Schema<Record<K, V>>;
-export function record<V extends any, K extends string = string>(
+export function record<V, K extends string>(
 	schema:
 		| Schema<V>
 		| {

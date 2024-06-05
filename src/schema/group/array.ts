@@ -5,7 +5,7 @@ import {
 import { err, isErr, ok } from "../../result/index";
 import type { Schema } from "../types";
 
-export function array<S extends any>(schema: Schema<S>): Schema<S[]> {
+export function array<S>(schema: Schema<S>): Schema<S[]> {
 	return {
 		validate(v) {
 			if (!Array.isArray(v)) {

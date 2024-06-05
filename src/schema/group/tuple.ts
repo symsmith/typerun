@@ -7,11 +7,11 @@ import { number } from "../primitive/number";
 import { string } from "../primitive/string";
 import type { Schema, SchemaReturn } from "../types";
 
-type ReturnValue<S extends any[]> = S extends [infer H, ...infer T]
+type ReturnValue<S extends unknown[]> = S extends [infer H, ...infer T]
 	? [SchemaReturn<H>, ...ReturnValue<T>]
 	: [];
 
-export function tuple<S extends Schema<any>[]>(
+export function tuple<S extends Schema<unknown>[]>(
 	...schemas: S
 ): Schema<ReturnValue<S>> {
 	return {

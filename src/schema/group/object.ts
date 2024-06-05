@@ -5,11 +5,11 @@ import {
 import { err, isErr, ok } from "../../result/index";
 import type { Schema, SchemaReturn } from "../types";
 
-type ReturnValue<R extends Record<PropertyKey, Schema<any>>> = {
+type ReturnValue<R extends Record<PropertyKey, Schema<unknown>>> = {
 	[k in keyof R]: SchemaReturn<R[k]>;
 };
 
-export function object<R extends Record<PropertyKey, Schema<any>>>(
+export function object<R extends Record<PropertyKey, Schema<unknown>>>(
 	schemaRecord: R
 ): Schema<ReturnValue<R>> {
 	return {
