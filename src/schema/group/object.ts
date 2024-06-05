@@ -2,7 +2,7 @@ import {
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
-import { err, ok, isOk } from "../../result/index";
+import { err, ok, isErr } from "../../result/index";
 import type { Schema, SchemaReturn } from "../types";
 
 type ReturnValue<R extends Record<PropertyKey, Schema<any>>> = {
@@ -21,20 +21,17 @@ export function object<R extends Record<PropertyKey, Schema<any>>>(
 			}
 
 			const value = v as Record<PropertyKey, unknown>;
-			const result: Partial<ReturnValue<R>> = {};
 
 			let key: keyof R;
 			for (key in schemaRecord) {
 				const schema = schemaRecord[key]!;
 				const keyResult = schema.validate(value[key]);
-				if (isOk(keyResult)) {
-					result[key] = keyResult.data;
-				} else {
+				if (isErr(keyResult)) {
 					return keyResult;
 				}
 			}
 
-			return ok(result as ReturnValue<R>);
+			return ok(v as ReturnValue<R>);
 		},
 	};
 }

@@ -7,3 +7,4 @@ export { either } from "./discriminated/either";
 export { optional } from "./discriminated/optional";
 
 export { object } from "./group/object";
+export { record } from "./group/record";
