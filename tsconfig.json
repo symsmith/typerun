@@ -4,14 +4,13 @@
 		"skipLibCheck": true,
 		"target": "es2022",
 		"allowJs": true,
-		"resolveJsonModule": true,
 		"moduleDetection": "force",
 		"isolatedModules": true,
 		"verbatimModuleSyntax": true,
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
 		"noImplicitOverride": true,
-		"module": "NodeNext",
+		"module": "ESNext",
 		"outDir": "dist",
 		"sourceMap": true,
 		"declaration": true,
@@ -19,7 +18,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"validator": ["src/index.ts"],
-			"validator/*": ["src/*"]
+			"validator/parse": ["src/parse/index.ts"],
+			"validator/schema": ["src/schema/index.ts"],
+			"validator/result": ["src/result/index.ts"]
 		}
 	}
 }
