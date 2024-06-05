@@ -25,9 +25,9 @@ export function object<R extends Record<PropertyKey, Schema<any>>>(
 			let key: keyof R;
 			for (key in schemaRecord) {
 				const schema = schemaRecord[key]!;
-				const keyResult = schema.validate(value[key]);
-				if (isErr(keyResult)) {
-					return keyResult;
+				const result = schema.validate(value[key]);
+				if (isErr(result)) {
+					return result;
 				}
 			}
 

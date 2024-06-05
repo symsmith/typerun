@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { validate } from "validator";
 import { isOk } from "validator/result";
 import {
+	array,
 	either,
 	literal,
 	number,
@@ -87,5 +88,54 @@ describe("tuple", () => {
 	test("should fail for something other than an array", () => {
 		const schema = tuple(number, number, string);
 		expect(isOk(validate(schema)(true))).toBe(false);
+	});
+});
+
+describe("array", () => {
+	test("should validate an array of the correct elements", () => {
+		const schema = array(number);
+		expect(isOk(validate(schema)([1, 2, 3]))).toBe(true);
+	});
+
+	test("should fail an array with a bad element", () => {
+		const schema = array(number);
+		expect(isOk(validate(schema)([1, 2, "hello"]))).toBe(false);
+	});
+
+	test("should fail for something other than an array", () => {
+		const schema = array(number);
+		expect(isOk(validate(schema)(true))).toBe(false);
+	});
+
+	test("should validate a complex array definition", () => {
+		const schema = array(
+			either(
+				object({
+					name: string,
+					age: number,
+				}),
+				array(array(either(number, literal("hello"))))
+			)
+		);
+
+		expect(
+			isOk(
+				validate(schema)([
+					{ name: "Joe", age: 14 },
+					{ name: "Jane", age: 15 },
+				])
+			)
+		).toBe(true);
+		expect(
+			isOk(
+				validate(schema)([
+					{ name: "Joe", age: 14 },
+					[
+						[3, "hello"],
+						["hello", 42],
+					],
+				])
+			)
+		).toBe(true);
 	});
 });
