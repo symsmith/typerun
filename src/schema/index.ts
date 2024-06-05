@@ -5,3 +5,4 @@ export { nullValue } from "./primitive/null";
 export { undefinedValue } from "./primitive/undefined";
 
 export { either } from "./discriminated/either";
+export { optional } from "./discriminated/optional";

@@ -5,19 +5,21 @@ import {
 	boolean,
 	either,
 	number,
+	optional,
 	string,
 	undefinedValue,
 } from "validator/schema";
 
-describe("`either`", () => {
+describe("either", () => {
 	test("should only validate its arguments", () => {
-		const res = validate(either(string, number))("hello");
+		const schema = either(string, number);
+		const res = validate(schema)("hello");
 		expect(isOk(res)).toBe(true);
 
-		const res2 = validate(either(string, number))(2);
+		const res2 = validate(schema)(2);
 		expect(isOk(res2)).toBe(true);
 
-		const res3 = validate(either(string, number))(null);
+		const res3 = validate(schema)(null);
 		expect(isOk(res3)).toBe(false);
 	});
 
@@ -33,6 +35,21 @@ describe("`either`", () => {
 			string,
 			either(number, boolean, either(boolean, undefinedValue))
 		);
+		const res = validate(schema)("hello");
+		expect(isOk(res)).toBe(true);
+
+		const res2 = validate(schema)(undefined);
+		expect(isOk(res2)).toBe(true);
+
+		const res3 = validate(schema)(null);
+		expect(isOk(res3)).toBe(false);
+	});
+});
+
+describe("optional", () => {
+	test("should validate its argument or undefined", () => {
+		const schema = optional(string);
+
 		const res = validate(schema)("hello");
 		expect(isOk(res)).toBe(true);
 

@@ -3,7 +3,7 @@ import { json } from "validator/parse";
 import { isOk } from "validator/result";
 import { string } from "validator/schema";
 
-describe("`json`", () => {
+describe("json", () => {
 	test("should parse and validate a string value", () => {
 		const res = json(string)('"null"');
 		expect(isOk(res)).toBe(true);
