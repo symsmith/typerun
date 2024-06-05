@@ -1,9 +1,9 @@
-import type { Result } from "../result/types";
+import { validate } from "../index";
 import { err } from "../result/index";
+import type { Result } from "../result/types";
 import type { Schema, SchemaReturn } from "../schema/types";
 import { getStack, jsonError, unknownError } from "./errors";
 import type { ParseError } from "./types";
-import { validate } from "../index";
 
 export function json<S extends Schema<any>>(schema: S) {
 	return function (toParse: string): Result<SchemaReturn<S>, ParseError> {

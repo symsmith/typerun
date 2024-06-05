@@ -2,7 +2,7 @@ import {
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
-import { err, ok, isErr } from "../../result/index";
+import { err, isErr, ok } from "../../result/index";
 import type { Schema, SchemaReturn } from "../types";
 
 type ReturnValue<R extends Record<PropertyKey, Schema<any>>> = {

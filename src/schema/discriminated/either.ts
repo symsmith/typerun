@@ -1,8 +1,8 @@
-import type { Result } from "../../result/types";
 import { getValidationError } from "../../parse/errors";
-import { err, isOk } from "../../result/index";
-import type { Schema, SchemaReturn } from "../types";
 import type { ParseError } from "../../parse/types";
+import { err, isOk } from "../../result/index";
+import type { Result } from "../../result/types";
+import type { Schema, SchemaReturn } from "../types";
 
 export function either<R extends Schema<any>[]>(
 	...schemas: R

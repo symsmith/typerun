@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { boolean, literal, number, string } from "validator/schema";
-import { isOk } from "validator/result";
 import { validate } from "validator";
+import { isOk } from "validator/result";
+import { boolean, literal, number, string } from "validator/schema";
 
 describe("string", () => {
 	test("should validate string value", () => {
