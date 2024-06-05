@@ -5,7 +5,7 @@ import {
 import { err, ok } from "../../result/index";
 import type { Schema } from "../types";
 
-export function literal<R extends boolean | string | number | undefined | null>(
+export function value<R extends boolean | string | number | undefined | null>(
 	value: R
 ): Schema<R> {
 	return {

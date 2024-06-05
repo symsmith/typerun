@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { validate } from "validator";
+import { is, validate } from "validator";
 import { isOk } from "validator/result";
-import { boolean, literal, number, string } from "validator/schema";
+import { boolean, number, string, value } from "validator/schema";
 
 describe("string", () => {
 	test("should validate string value", () => {
@@ -12,8 +12,7 @@ describe("string", () => {
 	});
 
 	test("should fail for invalid string value", () => {
-		const res = validate(string)(true);
-		expect(isOk(res)).toBe(false);
+		expect(is(string)(true)).toBe(false);
 	});
 });
 
@@ -26,8 +25,7 @@ describe("number", () => {
 	});
 
 	test("should fail for invalid number value", () => {
-		const res = validate(number)("not a number");
-		expect(isOk(res)).toBe(false);
+		expect(is(number)("not a number")).toBe(false);
 	});
 });
 
@@ -40,33 +38,29 @@ describe("boolean", () => {
 	});
 
 	test("should fail for invalid boolean value", () => {
-		const res = validate(boolean)("not a boolean");
-		expect(isOk(res)).toBe(false);
+		expect(is(boolean)("not a boolean")).toBe(false);
 	});
 });
 
 describe("literal", () => {
 	test("should validate itself", () => {
-		const res = validate(literal("hello"))("hello");
-		expect(isOk(res)).toBe(true);
+		expect(is(value("hello"))("hello")).toBe(true);
 	});
 
 	test("should fail for anything else", () => {
-		const schema = literal("hello");
-		expect(isOk(validate(schema)(3))).toBe(false);
-		expect(isOk(validate(schema)(undefined))).toBe(false);
-		expect(isOk(validate(schema)("hello!"))).toBe(false);
-		expect(isOk(validate(schema)(null))).toBe(false);
-		expect(isOk(validate(schema)(true))).toBe(false);
+		const schema = value("hello");
+		expect(is(schema)(3)).toBe(false);
+		expect(is(schema)(undefined)).toBe(false);
+		expect(is(schema)("hello!")).toBe(false);
+		expect(is(schema)(null)).toBe(false);
+		expect(is(schema)(true)).toBe(false);
 	});
 
 	test("should validate undefined", () => {
-		const res = validate(literal(undefined))(undefined);
-		expect(isOk(res)).toBe(true);
+		expect(is(value(undefined))(undefined)).toBe(true);
 	});
 
 	test("should validate null", () => {
-		const res = validate(literal(null))(null);
-		expect(isOk(res)).toBe(true);
+		expect(is(value(null))(null)).toBe(true);
 	});
 });

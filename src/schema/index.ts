@@ -1,5 +1,5 @@
 export { boolean } from "./primitive/boolean";
-export { literal } from "./primitive/literal";
+export { value } from "./primitive/literal";
 export { number } from "./primitive/number";
 export { string } from "./primitive/string";
 
