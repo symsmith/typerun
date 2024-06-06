@@ -1,5 +1,5 @@
-import { custom } from "validator/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
+import { custom } from "./custom";
 
 export function value<R extends boolean | string | number | undefined | null>(
 	value: R

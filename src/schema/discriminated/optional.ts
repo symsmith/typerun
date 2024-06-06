@@ -1,4 +1,4 @@
-import { value } from "../primitive/literal";
+import { value } from "../primitive/value";
 import type { Schema } from "../types";
 import { either } from "./either";
 

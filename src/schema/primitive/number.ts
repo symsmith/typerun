@@ -1,5 +1,5 @@
-import { custom } from "validator/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
+import { custom } from "./custom";
 
 export const number = custom(
 	(v): v is number => typeof v === "number" && !isNaN(v),
