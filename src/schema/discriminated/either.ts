@@ -18,7 +18,15 @@ export function either<R extends Schema<any>[]>(
 					break;
 				}
 			}
-			return result;
+			return isOk(result)
+				? result
+				: err(
+						getValidationError(
+							`Value \`${JSON.stringify(
+								v
+							)}\` does not correspond to any of the union validators`
+						)
+				  );
 		},
 	};
 }

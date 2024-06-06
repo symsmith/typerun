@@ -1,4 +1,5 @@
 import {
+	addPathToParseError,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
@@ -35,11 +36,17 @@ export function record<V, K extends string>(
 			for (const key in value) {
 				const keyResult = resolvedKeysSchema.validate(key);
 				if (isErr(keyResult)) {
-					return keyResult;
+					return {
+						...keyResult,
+						error: addPathToParseError(keyResult.error, key),
+					};
 				}
 				const valueResult = resolvedValuesSchema.validate(value[key]);
 				if (isErr(valueResult)) {
-					return valueResult;
+					return {
+						...valueResult,
+						error: addPathToParseError(valueResult.error, key),
+					};
 				}
 			}
 

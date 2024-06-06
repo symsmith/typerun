@@ -1,4 +1,5 @@
 import {
+	addPathToParseError,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
@@ -27,7 +28,7 @@ export function object<R extends Record<PropertyKey, Schema<unknown>>>(
 				const schema = schemaRecord[key]!;
 				const result = schema.validate(value[key]);
 				if (isErr(result)) {
-					return result;
+					return { ...result, error: addPathToParseError(result.error, key) };
 				}
 			}
 

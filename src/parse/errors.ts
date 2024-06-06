@@ -29,3 +29,18 @@ export function getStack(from: unknown, to: ParseError): ParseError {
 	}
 	return to;
 }
+
+export function addPathToParseError(
+	error: ParseError,
+	index: number
+): ParseError;
+export function addPathToParseError(error: ParseError, key: string): ParseError;
+export function addPathToParseError(error: ParseError, path: number | string) {
+	return {
+		...error,
+		path: {
+			[typeof path === "string" ? "key" : "index"]: path,
+			...(error.path && { path: error.path }),
+		},
+	};
+}

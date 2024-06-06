@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { is } from "validator";
+import { is, validate } from "validator";
+import { isOk } from "validator/result";
 import {
 	array,
 	either,
@@ -42,6 +43,18 @@ describe("object", () => {
 		const schema = object({});
 		expect(is(schema)(true)).toBe(false);
 	});
+
+	test("should fail with the key of the failed value", () => {
+		const schema = object({
+			name: string,
+			age: number,
+		});
+		const res = validate(schema)({ name: "Joe", age: "14" });
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			key: "age",
+		});
+	});
 });
 
 describe("record", () => {
@@ -64,6 +77,24 @@ describe("record", () => {
 		const schema = record({ k: either(value("a"), value("b")), v: number });
 		expect(is(schema)({ a: 1, b: 2, c: 3 })).toBe(false);
 	});
+
+	test("should fail with the key of the failed value", () => {
+		const schema = record(number);
+		const res = validate(schema)({ name: "Joe", age: "14" });
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			key: "name",
+		});
+	});
+
+	test("should fail with the key of the failed value", () => {
+		const schema = record({ k: either(value("a"), value("b")), v: number });
+		const res = validate(schema)({ name: "Joe", age: "14" });
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			key: "name",
+		});
+	});
 });
 
 describe("tuple", () => {
@@ -85,6 +116,15 @@ describe("tuple", () => {
 	test("should fail for something other than an array", () => {
 		const schema = tuple(number, number, string);
 		expect(is(schema)(true)).toBe(false);
+	});
+
+	test("should fail with the index of the failed value", () => {
+		const schema = tuple(number, number, string);
+		const res = validate(schema)([1, 2, 3]);
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			index: 2,
+		});
 	});
 });
 
@@ -130,5 +170,45 @@ describe("array", () => {
 				],
 			])
 		).toBe(true);
+	});
+
+	test("should fail with the index of the failed value", () => {
+		const schema = array(number);
+		const res = validate(schema)([1, 2, "a"]);
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			index: 2,
+		});
+	});
+
+	test("should contain the complete path of the failed value", () => {
+		const schema = tuple(
+			array(array(either(number, value("hello")))),
+			object({
+				name: string,
+				obj: object({
+					type: array(number),
+				}),
+			})
+		);
+
+		const res = validate(schema)([
+			[["hello"]],
+			{ name: "Jane", obj: { type: [1, 2, "3", 4] } },
+		]);
+
+		if (isOk(res)) return;
+		expect(res.error.path).toEqual({
+			index: 1,
+			path: {
+				key: "obj",
+				path: {
+					key: "type",
+					path: {
+						index: 2,
+					},
+				},
+			},
+		});
 	});
 });

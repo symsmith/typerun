@@ -1,4 +1,5 @@
 import {
+	addPathToParseError,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
@@ -18,7 +19,7 @@ export function array<S>(schema: Schema<S>): Schema<S[]> {
 				const value = v[i];
 				const res = schema.validate(value);
 				if (isErr(res)) {
-					return res;
+					return { ...res, error: addPathToParseError(res.error, i) };
 				}
 			}
 

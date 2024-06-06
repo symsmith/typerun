@@ -1,4 +1,5 @@
 import {
+	addPathToParseError,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
@@ -36,7 +37,7 @@ export function tuple<S extends Schema<unknown>[]>(
 				const schema = schemas[i]!;
 				const result = schema.validate(v[i]);
 				if (isErr(result)) {
-					return result;
+					return { ...result, error: addPathToParseError(result.error, i) };
 				}
 			}
 
