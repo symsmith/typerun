@@ -1,25 +1,11 @@
-import {
-	getValidationError,
-	getValidationErrorMessage,
-} from "../../parse/errors";
-import { err, ok } from "../../result/index";
-import type { Schema } from "../types";
+import { custom } from "validator/schema";
+import { getValidationErrorMessage } from "../../parse/errors";
 
 export function value<R extends boolean | string | number | undefined | null>(
 	value: R
-): Schema<R> {
-	return {
-		validate(v) {
-			return v === value
-				? ok(v as R)
-				: err(
-						getValidationError(
-							getValidationErrorMessage(
-								v,
-								`equal to \`${JSON.stringify(value)}\``
-							)
-						)
-				  );
-		},
-	};
+) {
+	return custom(
+		(v): v is R => v === value,
+		(v) => getValidationErrorMessage(v, `equal to \`${JSON.stringify(value)}\``)
+	);
 }

@@ -1,14 +1,7 @@
-import {
-	getValidationError,
-	getValidationErrorMessage,
-} from "../../parse/errors";
-import { err, ok } from "../../result/index";
-import type { Schema } from "../types";
+import { custom } from "validator/schema";
+import { getValidationErrorMessage } from "../../parse/errors";
 
-export const number: Schema<number> = {
-	validate(v) {
-		return typeof v === "number" && !isNaN(v)
-			? ok(v)
-			: err(getValidationError(getValidationErrorMessage(v, "a number")));
-	},
-};
+export const number = custom(
+	(v): v is number => typeof v === "number" && !isNaN(v),
+	(v) => getValidationErrorMessage(v, "a number")
+);

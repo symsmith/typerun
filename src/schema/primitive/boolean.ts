@@ -1,14 +1,7 @@
-import {
-	getValidationError,
-	getValidationErrorMessage,
-} from "../../parse/errors";
-import { err, ok } from "../../result/index";
-import type { Schema } from "../types";
+import { custom } from "validator/schema";
+import { getValidationErrorMessage } from "../../parse/errors";
 
-export const boolean: Schema<boolean> = {
-	validate(v) {
-		return typeof v === "boolean"
-			? ok(v)
-			: err(getValidationError(getValidationErrorMessage(v, "a boolean")));
-	},
-};
+export const boolean = custom(
+	(v): v is boolean => typeof v === "boolean",
+	(v) => getValidationErrorMessage(v, "a boolean")
+);

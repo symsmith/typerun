@@ -3,8 +3,6 @@ import {
 	getValidationErrorMessage,
 } from "../../parse/errors";
 import { err, isErr, ok } from "../../result/index";
-import { number } from "../primitive/number";
-import { string } from "../primitive/string";
 import type { Schema, SchemaReturn } from "../types";
 
 type ReturnValue<S extends unknown[]> = S extends [infer H, ...infer T]
@@ -46,5 +44,3 @@ export function tuple<S extends Schema<unknown>[]>(
 		},
 	};
 }
-
-const a = tuple(number, number, string);
