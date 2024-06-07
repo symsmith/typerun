@@ -9,9 +9,9 @@ export function either<R extends Schema<any>[]>(
 ): Schema<SchemaReturn<R[number]>> {
 	return {
 		validate(v) {
-			let result: Result<SchemaReturn<R[number]>, ParseError> = err(
-				getValidationError("`either` requires at least one argument")
-			);
+			let result: Result<SchemaReturn<R[number]>, ParseError> = err([
+				getValidationError("`either` requires at least one argument"),
+			]);
 			for (const schema of schemas) {
 				result = schema.validate(v);
 				if (isOk(result)) {
@@ -20,13 +20,13 @@ export function either<R extends Schema<any>[]>(
 			}
 			return isOk(result)
 				? result
-				: err(
+				: err([
 						getValidationError(
 							`Value \`${JSON.stringify(
 								v
 							)}\` does not correspond to any of the union validators`
-						)
-				  );
+						),
+				  ]);
 		},
 	};
 }

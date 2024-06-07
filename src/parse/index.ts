@@ -2,7 +2,7 @@ import { validate } from "../index";
 import { err } from "../result/index";
 import type { Result } from "../result/types";
 import type { Schema } from "../schema/types";
-import { getStack, jsonError, unknownError } from "./errors";
+import { jsonError, unknownError } from "./errors";
 import type { ParseError } from "./types";
 
 export function json<S>(schema: Schema<S>) {
@@ -12,9 +12,9 @@ export function json<S>(schema: Schema<S>) {
 			return validate(schema)(parsed);
 		} catch (e) {
 			if (e instanceof SyntaxError) {
-				return err(getStack(e, jsonError));
+				return err([jsonError]);
 			} else {
-				return err(getStack(e, unknownError));
+				return err([unknownError]);
 			}
 		}
 	};

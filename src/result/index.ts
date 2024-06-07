@@ -4,8 +4,8 @@ export function ok<R>(data: R): Ok<R> {
 	return { ok: true, data };
 }
 
-export function err<E>(error: E): Err<E> {
-	return { ok: false, error };
+export function err<E>(errors: E[]): Err<E> {
+	return { ok: false, errors };
 }
 
 export function isOk<R>(result: Result<R, unknown>): result is Ok<R> {

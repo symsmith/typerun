@@ -51,7 +51,8 @@ describe("object", () => {
 		});
 		const res = validate(schema)({ name: "Joe", age: "14" });
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
 			key: "age",
 		});
 	});
@@ -80,19 +81,47 @@ describe("record", () => {
 
 	test("should fail with the key of the failed value", () => {
 		const schema = record(number);
+		const res = validate(schema)({ name: "Joe", age: 14 });
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
+			key: "name",
+		});
+	});
+
+	test("should fail with the keys of all failed values", () => {
+		const schema = record(number);
 		const res = validate(schema)({ name: "Joe", age: "14" });
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(2);
+		expect(res.errors[0]!.path).toEqual({
 			key: "name",
+		});
+		expect(res.errors[1]!.path).toEqual({
+			key: "age",
 		});
 	});
 
 	test("should fail with the key of the failed value", () => {
 		const schema = record({ k: either(value("a"), value("b")), v: number });
-		const res = validate(schema)({ name: "Joe", age: "14" });
+		const res = validate(schema)({ name: "Joe", a: 14 });
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
 			key: "name",
+		});
+	});
+
+	test("should fail with all keys of the failed values", () => {
+		const schema = record({ k: either(value("a"), value("b")), v: number });
+		const res = validate(schema)({ name: "Joe", a: "14" });
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(2);
+		expect(res.errors[0]!.path).toEqual({
+			key: "name",
+		});
+		expect(res.errors[1]!.path).toEqual({
+			key: "a",
 		});
 	});
 });
@@ -122,7 +151,24 @@ describe("tuple", () => {
 		const schema = tuple(number, number, string);
 		const res = validate(schema)([1, 2, 3]);
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
+			index: 2,
+		});
+	});
+
+	test("should fail with all indices of the failed values", () => {
+		const schema = tuple(number, number, string);
+		const res = validate(schema)(["1", "2", 3]);
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(3);
+		expect(res.errors[0]!.path).toEqual({
+			index: 0,
+		});
+		expect(res.errors[1]!.path).toEqual({
+			index: 1,
+		});
+		expect(res.errors[2]!.path).toEqual({
 			index: 2,
 		});
 	});
@@ -176,7 +222,21 @@ describe("array", () => {
 		const schema = array(number);
 		const res = validate(schema)([1, 2, "a"]);
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
+			index: 2,
+		});
+	});
+
+	test("should fail with all the indices of the failed values", () => {
+		const schema = array(number);
+		const res = validate(schema)(["b", 2, "a"]);
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(2);
+		expect(res.errors[0]!.path).toEqual({
+			index: 0,
+		});
+		expect(res.errors[1]!.path).toEqual({
 			index: 2,
 		});
 	});
@@ -198,7 +258,8 @@ describe("array", () => {
 		]);
 
 		if (isOk(res)) return;
-		expect(res.error.path).toEqual({
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.path).toEqual({
 			index: 1,
 			path: {
 				key: "obj",
@@ -206,6 +267,65 @@ describe("array", () => {
 					key: "type",
 					path: {
 						index: 2,
+					},
+				},
+			},
+		});
+	});
+
+	test("should contain the complete path of all failed values", () => {
+		const schema = tuple(
+			array(array(either(number, value("hello")))),
+			object({
+				name: string,
+				obj: object({
+					type: array(number),
+				}),
+			})
+		);
+
+		const res = validate(schema)([
+			[["hell"]],
+			{ name: 1, obj: { type: [1, 2, "3", "4"] } },
+		]);
+
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(4);
+		expect(res.errors[0]!.path).toEqual({
+			index: 0,
+			path: {
+				index: 0,
+				path: {
+					index: 0,
+				},
+			},
+		});
+		expect(res.errors[1]!.path).toEqual({
+			index: 1,
+			path: {
+				key: "name",
+			},
+		});
+		expect(res.errors[2]!.path).toEqual({
+			index: 1,
+			path: {
+				key: "obj",
+				path: {
+					key: "type",
+					path: {
+						index: 2,
+					},
+				},
+			},
+		});
+		expect(res.errors[3]!.path).toEqual({
+			index: 1,
+			path: {
+				key: "obj",
+				path: {
+					key: "type",
+					path: {
+						index: 3,
 					},
 				},
 			},

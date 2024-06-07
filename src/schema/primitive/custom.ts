@@ -14,15 +14,15 @@ export function custom<T>(
 			if (validationFn(v)) {
 				return ok(v);
 			} else {
-				return err(
+				return err([
 					getValidationError(
 						typeof errorMessage === "string"
 							? errorMessage
 							: errorMessage
 							? errorMessage(v)
 							: getValidationErrorMessage(v, "correct")
-					)
-				);
+					),
+				]);
 			}
 		},
 	};

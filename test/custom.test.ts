@@ -20,6 +20,7 @@ describe("custom", () => {
 		);
 		const res = validate(moreThan3)(1);
 		if (isOk(res)) return;
-		expect(res.error.message).toEqual("Expected 1 to be more than 3");
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.message).toEqual("Expected 1 to be more than 3");
 	});
 });

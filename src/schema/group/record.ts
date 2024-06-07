@@ -1,5 +1,6 @@
+import type { ParseError } from "src/parse/types";
 import {
-	addPathToParseError,
+	addPathToParseErrors,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
@@ -23,31 +24,31 @@ export function record<V, K extends string>(
 	return {
 		validate(v) {
 			if (typeof v !== "object" || v === null) {
-				return err(
-					getValidationError(getValidationErrorMessage(v, "an object"))
-				);
+				return err([
+					getValidationError(getValidationErrorMessage(v, "an object")),
+				]);
 			}
 
 			const resolvedKeysSchema = "k" in schema ? schema.k : string;
 			const resolvedValuesSchema = "v" in schema ? schema.v : schema;
 
 			const value = v as Record<PropertyKey, unknown>;
+			const errors: ParseError[] = [];
 
 			for (const key in value) {
 				const keyResult = resolvedKeysSchema.validate(key);
 				if (isErr(keyResult)) {
-					return {
-						...keyResult,
-						error: addPathToParseError(keyResult.error, key),
-					};
+					errors.push(...addPathToParseErrors(keyResult.errors, key));
+					continue;
 				}
 				const valueResult = resolvedValuesSchema.validate(value[key]);
 				if (isErr(valueResult)) {
-					return {
-						...valueResult,
-						error: addPathToParseError(valueResult.error, key),
-					};
+					errors.push(...addPathToParseErrors(valueResult.errors, key));
 				}
+			}
+
+			if (errors.length) {
+				return err(errors);
 			}
 
 			return ok(v as Record<K, V>);

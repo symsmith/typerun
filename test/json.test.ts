@@ -16,6 +16,7 @@ describe("json", () => {
 		const res = json(string)("{");
 		expect(isOk(res)).toBe(false);
 		if (isOk(res)) return;
-		expect(res.error.name).toBe("JSONError");
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.name).toBe("JSONError");
 	});
 });
