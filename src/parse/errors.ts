@@ -19,15 +19,11 @@ export function getValidationErrorMessage(
 	return `Value \`${JSON.stringify(value)}\` is not ${expectedType}`;
 }
 
-export function getValidationError(message: string): ParseError {
-	return { ...validationError, message };
-}
-
-export function getStack(from: unknown, to: ParseError): ParseError {
-	if (from instanceof Error && from.stack) {
-		return { ...to, stack: from.stack };
-	}
-	return to;
+export function getValidationError(
+	message: string,
+	errors?: ParseError[]
+): ParseError {
+	return { ...validationError, message, ...(errors && { errors }) };
 }
 
 export function addPathToParseErrors(

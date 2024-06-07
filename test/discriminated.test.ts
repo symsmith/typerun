@@ -50,6 +50,14 @@ describe("either", () => {
 		expect(is(schema)(undefined)).toBe(true);
 		expect(is(schema)(null)).toBe(false);
 	});
+
+	test("should have sub-error fields for all discriminated types", () => {
+		const schema = either(number, boolean);
+		const res = validate(schema)(null);
+		if (isOk(res)) return;
+		expect(res.errors).toHaveLength(1);
+		expect(res.errors[0]!.errors).toHaveLength(2);
+	});
 });
 
 describe("optional", () => {

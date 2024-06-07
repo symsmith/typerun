@@ -10,5 +10,5 @@ export interface ParseError {
 	name: ParseErrorName;
 	message: string;
 	path?: ErrorPath;
-	stack?: string;
+	errors?: ParseError[];
 }
