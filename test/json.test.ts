@@ -35,3 +35,33 @@ describe("json", () => {
 		expect(res.errors[0]!.name).toBe("UnknownError");
 	});
 });
+
+describe("json with option throwing", () => {
+	test("should parse and validate a string value", () => {
+		const res = json(string, { throwing: true })('"null"');
+		expect(res).toBe("null");
+		expect(res).not.toBe(null);
+	});
+
+	test("should fail for an incorrect value", () => {
+		expect(() => json(string, { throwing: true })("null")).toThrow();
+	});
+
+	test("should fail for a non-JSON value", () => {
+		expect(() => json(string, { throwing: true })("{")).toThrow();
+	});
+
+	test("should fail with UnknownError for any other error", () => {
+		expect(() =>
+			json(
+				custom((data): data is string => {
+					if (1 === 1) {
+						throw data;
+					}
+					return typeof data === "string";
+				}),
+				{ throwing: true }
+			)("{}")
+		).toThrow();
+	});
+});
