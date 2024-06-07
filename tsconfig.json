@@ -15,12 +15,13 @@
 		"sourceMap": true,
 		"declaration": true,
 		"lib": ["es2022", "dom"],
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"paths": {
-			"validator": ["src/index.ts"],
-			"validator/parse": ["src/parse/index.ts"],
-			"validator/schema": ["src/schema/index.ts"],
-			"validator/result": ["src/result/index.ts"]
-		}
+			"validator": ["index.ts"],
+			"validator/parse": ["parse/index.ts"],
+			"validator/schema": ["schema/index.ts"],
+			"validator/result": ["result/index.ts"]
+		},
+		"types": ["bun-types"]
 	}
 }
