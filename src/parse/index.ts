@@ -39,19 +39,3 @@ export function json<S>(schema: Schema<S>, options?: ValidateOptions) {
 		}
 	};
 }
-/*
-export function jsonOrThrow<S>(schema: Schema<S>) {
-	return function (toParse: string): S {
-		try {
-			const parsed = JSON.parse(toParse);
-			return validateOrThrow(schema)(parsed);
-		} catch (e) {
-			if (e instanceof SyntaxError) {
-				throw [jsonError];
-			} else {
-				throw [unknownError];
-			}
-		}
-	};
-}
-*/

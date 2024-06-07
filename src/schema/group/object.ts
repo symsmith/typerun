@@ -1,9 +1,9 @@
-import type { ParseError } from "src/parse/types";
 import {
 	addPathToParseErrors,
 	getValidationError,
 	getValidationErrorMessage,
 } from "../../parse/errors";
+import type { ParseError } from "../../parse/types";
 import { err, isErr, ok } from "../../result/index";
 import type { Schema, SchemaReturn } from "../types";
 

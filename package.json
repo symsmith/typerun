@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "tsc --watch --noEmit",
-		"build": "tsc",
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
 		"test": "bun test",
 		"devtest": "bun test --watch"
 	},

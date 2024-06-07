@@ -1,8 +1,8 @@
 import {
 	getValidationError,
 	getValidationErrorMessage,
-} from "src/parse/errors";
-import { err, ok } from "validator/result";
+} from "../../parse/errors";
+import { err, ok } from "../../result/index";
 import type { Schema } from "../types";
 
 export function custom<T>(

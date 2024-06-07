@@ -1,5 +1,5 @@
-import { isOk } from "validator/result";
 import type { ParseError } from "./parse/types";
+import { isOk } from "./result/index";
 import type { Result } from "./result/types";
 import type { Schema } from "./schema/types";
 import type { ValidateOptions } from "./types";
@@ -26,17 +26,6 @@ export function validate<S>(schema: Schema<S>, options?: ValidateOptions) {
 		}
 	};
 }
-/*
-export function validateOrThrow<S>(schema: Schema<S>) {
-	return function (data: unknown): S {
-		const res = schema.validate(data);
-		if (isOk(res)) {
-			return res.data;
-		} else {
-			throw res.errors;
-		}
-	};
-}*/
 
 export function is<S>(schema: Schema<S>) {
 	return function (data: unknown): data is S {
