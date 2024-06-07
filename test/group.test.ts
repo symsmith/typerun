@@ -79,6 +79,11 @@ describe("record", () => {
 		expect(is(schema)({ a: 1, b: 2, c: 3 })).toBe(false);
 	});
 
+	test("should fail for something other than an object", () => {
+		const schema = record(string);
+		expect(is(schema)(true)).toBe(false);
+	});
+
 	test("should fail with the key of the failed value", () => {
 		const schema = record(number);
 		const res = validate(schema)({ name: "Joe", age: 14 });
