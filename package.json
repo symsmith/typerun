@@ -1,6 +1,6 @@
 {
   "name": "typerun",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Types, at runtime.",
   "keywords": [
     "runtime",
@@ -10,6 +10,8 @@
   ],
   "homepage": "https://github.com/symsmith/typerun",
   "bugs": "https://github.com/symsmith/typerun/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
