@@ -2,7 +2,7 @@
 
 > _Types, at runtime._
 
-**TypeRun** is a fast, lightweight, DX-focused, dependency-free validation library that works everywhere JS can run. It allows you to define schemas against which you can validate unknown data, and infer TypeScript types from those schemas.
+**TypeRun** is a fast, lightweight, DX-focused, fully tested, dependency-free validation library that works everywhere JS can run. It allows you to define data schemas, then validate these against unknown data, and infer TypeScript types from them.
 
 ```ts
 import { is } from "typerun";

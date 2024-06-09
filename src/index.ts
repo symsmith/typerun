@@ -41,18 +41,18 @@ import type { ValidateOptions } from "./types";
  *
  *       const fail = validate(array(string))([1, "a", 2]);
  *       console.log(!fail.ok && fail.errors);
- *       /* -> [
- *         {
- *           name: "ValidationError",
- *           message: "Value `1` is not a string",
- *           path: { index: 0 }
- *         },
- *         {
- *           name: "ValidationError",
- *           message: "Value `2` is not a string",
- *           path: { index: 2 }
- *         },
- *       ] *\/
+ *       //-> [
+ *       //   {
+ *       //     name: "ValidationError",
+ *       //     message: "Value `1` is not a string",
+ *       //     path: { index: 0 }
+ *       //   },
+ *       //   {
+ *       //     name: "ValidationError",
+ *       //     message: "Value `2` is not a string",
+ *       //     path: { index: 2 }
+ *       //   },
+ *       // ]
  */
 export function validate<S>(
   schema: Schema<S>,
