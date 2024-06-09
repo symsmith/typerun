@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { is, validate } from "validator";
-import { isOk } from "validator/result";
-import { boolean, either, number, optional, string, value } from "validator/schema";
+import { is, validate } from "typerun";
+import { isOk } from "typerun/result";
+import { boolean, either, number, optional, string, value } from "typerun/schema";
 
 describe("either", () => {
   test("should only validate its arguments", () => {

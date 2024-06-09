@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { is, validate } from "validator";
-import { isOk } from "validator/result";
-import { custom, number } from "validator/schema";
+import { is, validate } from "typerun";
+import { isOk } from "typerun/result";
+import { custom, number } from "typerun/schema";
 
 describe("custom", () => {
   test("should validate data with a custom validation function", () => {

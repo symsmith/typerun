@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { json } from "validator/parse";
-import { isOk } from "validator/result";
-import { custom, string } from "validator/schema";
+import { json } from "typerun/parse";
+import { isOk } from "typerun/result";
+import { custom, string } from "typerun/schema";
 
 describe("json", () => {
   test("should parse and validate a string value", () => {

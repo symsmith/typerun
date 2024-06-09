@@ -17,10 +17,10 @@
     "lib": ["es2022", "dom"],
     "baseUrl": "./src",
     "paths": {
-      "validator": ["index.ts"],
-      "validator/parse": ["parse/index.ts"],
-      "validator/schema": ["schema/index.ts"],
-      "validator/result": ["result/index.ts"]
+      "typerun": ["index.ts"],
+      "typerun/parse": ["parse/index.ts"],
+      "typerun/schema": ["schema/index.ts"],
+      "typerun/result": ["result/index.ts"]
     },
     "types": ["bun-types"]
   },

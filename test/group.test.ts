@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { is, validate } from "validator";
-import { isOk } from "validator/result";
+import { is, validate } from "typerun";
+import { isOk } from "typerun/result";
 import {
   array,
   either,
@@ -11,7 +11,7 @@ import {
   string,
   tuple,
   value,
-} from "validator/schema";
+} from "typerun/schema";
 
 describe("object", () => {
   test("should validate an object of the correct shape", () => {

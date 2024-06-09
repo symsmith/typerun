@@ -12,3 +12,7 @@
     height: 20px;
   }
 }
+
+code {
+  border-radius: 0.4em;
+}

@@ -41,7 +41,7 @@
     "test:dev": "bun test --watch",
     "docs": "typedoc",
     "docs:serve": "bun docs && bun x serve docs",
-    "docs:dev": "nodemon --watch ./src --watch README.md --watch tsconfig.json -e ts --exec \"bun run docs:serve\"",
+    "docs:dev": "nodemon --watch ./src --watch README.md --watch tsconfig.json --watch assets/docs.css --watch package.json -e ts --exec \"bun run docs:serve\"",
     "fmt": "prettier . --check",
     "fmt:fix": "prettier . --check --write"
   },
