@@ -1,0 +1,14 @@
+.page-menu .settings {
+  display: none;
+}
+
+.page-menu .tsd-accordion-summary h3 {
+  display: flex;
+  align-items: center;
+
+  svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+}

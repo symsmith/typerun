@@ -12,4 +12,4 @@ export { object } from "./group/object";
 export { record } from "./group/record";
 export { tuple } from "./group/tuple";
 
-export type { SchemaReturn as Infer } from "./types";
+export type { SchemaReturn as Infer, Schema } from "./types";

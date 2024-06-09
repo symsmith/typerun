@@ -1,3 +1,3 @@
 export type ValidateOptions = {
-	throwing?: boolean;
+  throwing?: boolean;
 };
