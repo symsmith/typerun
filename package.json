@@ -1,6 +1,6 @@
 {
   "name": "typerun",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Types, at runtime.",
   "keywords": [
     "runtime",
@@ -41,7 +41,7 @@
     "test:dev": "bun test --watch",
     "docs": "typedoc",
     "docs:serve": "bun docs && bun x serve docs",
-    "docs:dev": "nodemon --watch ./src --watch README.md -e ts --exec \"bun run docs:serve\"",
+    "docs:dev": "nodemon --watch ./src --watch README.md --watch tsconfig.json -e ts --exec \"bun run docs:serve\"",
     "fmt": "prettier . --check",
     "fmt:fix": "prettier . --check --write"
   },

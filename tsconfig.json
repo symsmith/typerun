@@ -31,6 +31,8 @@
     "readme": "./README.md",
     "plugin": ["typedoc-plugin-missing-exports"],
     "sort": ["source-order"],
-    "customCss": "./assets/docs.css"
+    "customCss": "./assets/docs.css",
+    "titleLink": "/",
+    "cname": "typerun.js.org"
   }
 }
