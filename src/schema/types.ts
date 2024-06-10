@@ -12,4 +12,15 @@ export interface Schema<R> {
   validate: (v: unknown) => Result<R, ParseError>;
 }
 
+/**
+ * The `Infer` type is a utility type to extract the return type of a `Schema`. Use it to get the
+ * TypeScript type of any defined schema.
+ *
+ * ## Example
+ *
+ *     import { Infer, object, string } from "typerun/schema";
+ *
+ *     const schema = object({ name: string });
+ *     type SchemaType = Infer<typeof schema>; // { name: string }
+ */
 export type SchemaReturn<S> = S extends Schema<infer R> ? R : never;

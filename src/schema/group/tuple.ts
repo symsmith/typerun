@@ -7,6 +7,7 @@ import type { ParseError } from "../../parse/types";
 import { err, isErr, ok } from "../../result/index";
 import type { Schema, SchemaReturn } from "../types";
 
+/** @ignore */
 type ReturnValue<S extends unknown[]> = S extends [infer H, ...infer T]
   ? [SchemaReturn<H>, ...ReturnValue<T>]
   : [];
