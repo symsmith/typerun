@@ -75,6 +75,7 @@ You can then validate some unknown data to be of the correct type, in a safe, no
 
 ```ts
 import { validate } from "typerun";
+import { isOk } from "typerun/result";
 
 const unknownData: unknown = await fetchUser(42);
 const userResult = validate(userSchema)(unknownData);

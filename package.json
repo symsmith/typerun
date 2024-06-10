@@ -40,16 +40,18 @@
     "test": "bun test",
     "test:dev": "bun test --watch",
     "docs": "typedoc",
-    "docs:serve": "bun docs && bun x serve docs",
+    "docs:serve": "bun docs && serve docs",
     "docs:dev": "nodemon --watch ./src --watch README.md --watch tsconfig.json --watch assets/docs.css --watch package.json -e ts --exec \"bun run docs:serve\"",
     "fmt": "prettier . --check",
     "fmt:fix": "prettier . --check --write"
   },
   "devDependencies": {
+    "@8hobbies/typedoc-plugin-404": "^2.2.0",
     "bun-types": "latest",
     "nodemon": "^3.1.3",
     "prettier": "^3.3.1",
     "prettier-plugin-jsdoc": "^1.3.0",
+    "serve": "^14.2.3",
     "typedoc": "^0.25.13",
     "typedoc-plugin-missing-exports": "^2.2.0",
     "typescript": "^5.4.5"
