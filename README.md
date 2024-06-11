@@ -2,6 +2,12 @@
 
 > _Types, at runtime._
 
+[![NPM Version](https://img.shields.io/npm/v/typerun)](https://npmjs.com/typerun)
+![Test coverage: 100%](https://img.shields.io/badge/coverage-100%25-green)
+[![Size, minified and gzipped](https://img.shields.io/bundlephobia/minzip/typerun)](https://bundlephobia.com/package/typerun)
+[![No dependencies](https://img.shields.io/badge/dependencies-0-blue)](https://bundlephobia.com/package/typerun)
+[![Tree shaking: supported](https://img.shields.io/badge/tree%20shaking-supported-green)](https://bundlephobia.com/package/typerun)
+
 **TypeRun** is a fast, lightweight, DX-focused, fully tested, dependency-free validation library that works everywhere JS can run. It allows you to define data schemas, then validate these against unknown data, and infer TypeScript types from them.
 
 ```ts

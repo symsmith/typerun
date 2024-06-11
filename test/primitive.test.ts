@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { is, validate } from "typerun";
 import { isOk } from "typerun/result";
-import { boolean, number, string, value } from "typerun/schema";
+import { any, boolean, number, string, value } from "typerun/schema";
 
 describe("string", () => {
   test("should validate string value", () => {
@@ -62,5 +62,16 @@ describe("literal", () => {
 
   test("should validate null", () => {
     expect(is(value(null))(null)).toBe(true);
+  });
+});
+
+describe("any", () => {
+  test("should validate any value", () => {
+    expect(is(any)("hello")).toBe(true);
+    expect(is(any)(3)).toBe(true);
+    expect(is(any)(undefined)).toBe(true);
+    expect(is(any)("hello!")).toBe(true);
+    expect(is(any)(null)).toBe(true);
+    expect(is(any)(true)).toBe(true);
   });
 });

@@ -1,3 +1,4 @@
+export { any } from "./primitive/any";
 export { boolean } from "./primitive/boolean";
 export { custom } from "./primitive/custom";
 export { number } from "./primitive/number";
