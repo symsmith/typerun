@@ -30,7 +30,7 @@
     "name": "TypeRun",
     "readme": "./README.md",
     "plugin": ["typedoc-plugin-missing-exports", "@8hobbies/typedoc-plugin-404"],
-    "sort": ["source-order"],
+    "sort": ["alphabetical"],
     "customCss": "./assets/docs.css",
     "titleLink": "/",
     "cname": "typerun.js.org"

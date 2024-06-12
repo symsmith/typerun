@@ -2,6 +2,7 @@ import {
   addPathToParseErrors,
   getValidationError,
   getValidationErrorMessage,
+  serialize,
 } from "../../parse/errors";
 import type { ParseError } from "../../parse/types";
 import { err, isErr, ok } from "../../result/index";
@@ -55,9 +56,7 @@ export function tuple<S extends Schema<unknown>[]>(...schemas: S): Schema<Return
       if (v.length !== schemas.length) {
         return err([
           getValidationError(
-            `Array \`${JSON.stringify(
-              v
-            )}\` does not have the correct number of elements (Expected: ${
+            `Array \`${serialize(v)}\` does not have the correct number of elements (Expected: ${
               schemas.length
             } - Actual: ${v.length})`
           ),

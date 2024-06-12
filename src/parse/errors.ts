@@ -12,8 +12,12 @@ const validationError: Omit<ParseError, "message"> = {
   name: "ValidationError",
 };
 
+export function serialize(value: unknown): string {
+  return typeof value === "bigint" ? `${value}` : JSON.stringify(value);
+}
+
 export function getValidationErrorMessage(value: unknown, expectedType: string) {
-  return `Value \`${JSON.stringify(value)}\` is not ${expectedType}`;
+  return `Value \`${serialize(value)}\` is not ${expectedType}`;
 }
 
 export function getValidationError(message: string, errors?: ParseError[]): ParseError {

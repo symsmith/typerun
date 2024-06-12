@@ -1,4 +1,4 @@
-import { getValidationError } from "../../parse/errors";
+import { getValidationError, serialize } from "../../parse/errors";
 import type { ParseError } from "../../parse/types";
 import { err, isOk } from "../../result/index";
 import type { Result } from "../../result/types";
@@ -51,7 +51,7 @@ export function either<R extends Schema<any>[]>(...schemas: R): Schema<SchemaRet
         ? result
         : err([
             getValidationError(
-              `Value \`${JSON.stringify(v)}\` does not correspond to any of the union validators`,
+              `Value \`${serialize(v)}\` does not correspond to any of the union validators`,
               errors
             ),
           ]);

@@ -7,10 +7,10 @@ import type { Result } from "../result/types";
  *
  * @typeParam R The TypeScript type matching the type that is validated at runtime by the schema.
  */
-export interface Schema<R> {
+export type Schema<R> = {
   /** The `validate` function takes an unknown input and validates it against its reference type `R`. */
   validate: (v: unknown) => Result<R, ParseError>;
-}
+};
 
 /**
  * The `Infer` type is a utility type to extract the return type of a `Schema`. Use it to get the

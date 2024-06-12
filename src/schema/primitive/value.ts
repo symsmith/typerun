@@ -1,9 +1,10 @@
-import { getValidationErrorMessage } from "../../parse/errors";
+import { getValidationErrorMessage, serialize } from "../../parse/errors";
 import { custom } from "./custom";
 
 /**
  * The `value` schema validates that the input is exactly any given literal value. This schema
- * allows you to verify the values `undefined` and `null`.
+ * allows you to verify the values `undefined` and `null`, as well as any other literal primitive
+ * value.
  *
  * ## Example
  *
@@ -24,9 +25,11 @@ import { custom } from "./custom";
  *
  * @param value The literal value to validate.
  */
-export function value<R extends boolean | string | number | undefined | null | Symbol>(value: R) {
+export function value<R extends string | number | bigint | boolean | undefined | symbol | null>(
+  value: R
+) {
   return custom(
     (v): v is R => v === value,
-    (v) => getValidationErrorMessage(v, `equal to \`${JSON.stringify(value)}\``)
+    (v) => getValidationErrorMessage(v, `equal to \`${serialize(value)}\``)
   );
 }
