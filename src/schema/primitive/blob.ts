@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from "typerun/schema";
 
 /**
  * The `blob` schema validates that the input is a JavaScript Blob object. It is an alias for

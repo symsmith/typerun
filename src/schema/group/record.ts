@@ -1,12 +1,11 @@
+import type { ParseError } from "typerun/parse";
+import { err, isErr, ok } from "typerun/result";
+import { string, type Schema } from "typerun/schema";
 import {
   addPathToParseErrors,
   getValidationError,
   getValidationErrorMessage,
 } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isErr, ok } from "../../result/index";
-import { string } from "../primitive/string";
-import type { Schema } from "../types";
 
 /**
  * The `record` schema checks that the type of the value is an object, and that all of its

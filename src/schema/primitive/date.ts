@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from "typerun/schema";
 
 /**
  * The `date` schema validates that the input is a JavaScript Date object. It is an alias for

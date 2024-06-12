@@ -1,6 +1,5 @@
+import { custom, type Schema } from "typerun/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
-import type { Schema } from "../types";
-import { custom } from "./custom";
 
 /**
  * The `instance` schema validates that the input is an instance of a class.

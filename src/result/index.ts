@@ -1,4 +1,4 @@
-import type { Err, Ok, Result } from "./types";
+import type { Err, Ok, Result } from "typerun/result";
 
 /**
  * Create a successful {@link Result | result} with some data.

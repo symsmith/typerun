@@ -1,6 +1,6 @@
+import { err, ok } from "typerun/result";
+import type { Schema } from "typerun/schema";
 import { getValidationError, getValidationErrorMessage } from "../../parse/errors";
-import { err, ok } from "../../result/index";
-import type { Schema } from "../types";
 
 /**
  * The `custom` schema allows the user to define its own schema, if it is not present in the

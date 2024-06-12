@@ -1,6 +1,4 @@
-import { value } from "../primitive/value";
-import type { Schema } from "../types";
-import { either } from "./either";
+import { either, value, type Schema } from "typerun/schema";
 
 /**
  * The `optional` schema checks that the type of the value is either the given type, or `undefined`.

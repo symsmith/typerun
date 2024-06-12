@@ -1,5 +1,5 @@
-import type { ParseError } from "../parse/types";
-import type { Result } from "../result/types";
+import type { ParseError } from "typerun/parse";
+import type { Result } from "typerun/result";
 
 /**
  * The `Schema` type is the basic building block of TypeRun. It represents the runtime validation of

@@ -1,8 +1,7 @@
+import type { ParseError } from "typerun/parse";
+import { err, isOk, type Result } from "typerun/result";
+import type { Infer, Schema } from "typerun/schema";
 import { getValidationError, serialize } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isOk } from "../../result/index";
-import type { Result } from "../../result/types";
-import type { Schema, SchemaReturn } from "../types";
 
 /**
  * The `either` schema is the equivalent of the TypeScript union (`|`). It allows you to validate
@@ -32,10 +31,10 @@ import type { Schema, SchemaReturn } from "../types";
  *
  * @param schemas All the schemas that the value can match.
  */
-export function either<R extends Schema<any>[]>(...schemas: R): Schema<SchemaReturn<R[number]>> {
+export function either<R extends Schema<any>[]>(...schemas: R): Schema<Infer<R[number]>> {
   return {
     validate(v) {
-      let result: Result<SchemaReturn<R[number]>, ParseError> = err([
+      let result: Result<Infer<R[number]>, ParseError> = err([
         getValidationError("`either` requires at least one argument"),
       ]);
       const errors: ParseError[] = [];

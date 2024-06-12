@@ -1,5 +1,5 @@
+import { custom } from "typerun/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
-import { custom } from "./custom";
 
 /**
  * The `bigint` schema validates that the input is a JavaScript BigInt value. It fails for anything

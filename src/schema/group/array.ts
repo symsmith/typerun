@@ -1,11 +1,11 @@
+import type { ParseError } from "typerun/parse";
+import { err, isErr, ok } from "typerun/result";
+import type { Schema } from "typerun/schema";
 import {
   addPathToParseErrors,
   getValidationError,
   getValidationErrorMessage,
 } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isErr, ok } from "../../result/index";
-import type { Schema } from "../types";
 
 /**
  * The `array` schema checks that the type of the value is an array, and that all of its elements

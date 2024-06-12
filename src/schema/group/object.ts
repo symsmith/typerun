@@ -1,11 +1,11 @@
+import type { ParseError } from "typerun/parse";
+import { err, isErr, ok } from "typerun/result";
+import type { Infer, Schema } from "typerun/schema";
 import {
   addPathToParseErrors,
   getValidationError,
   getValidationErrorMessage,
 } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isErr, ok } from "../../result/index";
-import type { Schema, SchemaReturn } from "../types";
 
 /**
  * The `object` schema checks that the type of the value is an object, and that all of its
@@ -54,7 +54,7 @@ import type { Schema, SchemaReturn } from "../types";
 export function object<R extends Record<PropertyKey, Schema<unknown>>>(
   schemaRecord: R
 ): Schema<{
-  [k in keyof R]: SchemaReturn<R[k]>;
+  [k in keyof R]: Infer<R[k]>;
 }> {
   return {
     validate(v) {
@@ -80,7 +80,7 @@ export function object<R extends Record<PropertyKey, Schema<unknown>>>(
 
       return ok(
         v as {
-          [k in keyof R]: SchemaReturn<R[k]>;
+          [k in keyof R]: Infer<R[k]>;
         }
       );
     },

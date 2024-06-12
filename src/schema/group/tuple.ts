@@ -1,16 +1,16 @@
+import type { ParseError } from "typerun/parse";
+import { err, isErr, ok } from "typerun/result";
+import type { Infer, Schema } from "typerun/schema";
 import {
   addPathToParseErrors,
   getValidationError,
   getValidationErrorMessage,
   serialize,
 } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isErr, ok } from "../../result/index";
-import type { Schema, SchemaReturn } from "../types";
 
 /** @ignore */
 type ReturnValue<S extends unknown[]> = S extends [infer H, ...infer T]
-  ? [SchemaReturn<H>, ...ReturnValue<T>]
+  ? [Infer<H>, ...ReturnValue<T>]
   : [];
 
 /**

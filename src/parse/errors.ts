@@ -1,4 +1,4 @@
-import type { ParseError } from "./types";
+import type { ParseError } from "typerun/parse";
 
 export const unknownError: ParseError = {
   name: "UnknownError",

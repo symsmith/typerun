@@ -1,7 +1,6 @@
-import type { ParseError } from "./parse/types";
-import { isOk } from "./result/index";
-import type { Result } from "./result/types";
-import type { Schema } from "./schema/types";
+import type { ParseError } from "typerun/parse";
+import { isOk, type Result } from "typerun/result";
+import type { Schema } from "typerun/schema";
 import type { ValidateOptions } from "./types";
 
 /**

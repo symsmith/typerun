@@ -1,5 +1,5 @@
+import { custom } from "typerun/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
-import { custom } from "./custom";
 
 /**
  * The `nan` schema validates that the input is the JavaScript value `NaN`. It fails for anything

@@ -1,5 +1,5 @@
+import { custom } from "typerun/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
-import { custom } from "./custom";
 
 /**
  * The `boolean` schema validates that the input is either `true` or `false`.

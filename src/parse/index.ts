@@ -1,11 +1,9 @@
-import { is, validate } from "../index";
-import { err } from "../result/index";
-import type { Result } from "../result/types";
-import { array, object, value } from "../schema/index";
-import type { Schema } from "../schema/types";
+import { is, validate } from "typerun";
+import type { ParseError } from "typerun/parse";
+import { err, type Result } from "typerun/result";
+import { array, object, value, type Schema } from "typerun/schema";
 import type { ValidateOptions } from "../types";
 import { jsonError, unknownError } from "./errors";
-import type { ParseError } from "./types";
 
 /**
  * The `json` function is a parsing utility to get a typed and runtime-validated object out of a
@@ -89,3 +87,5 @@ export function json<S>(schema: Schema<S>, options?: ValidateOptions) {
     }
   };
 }
+
+export { type ParseError } from "./types";

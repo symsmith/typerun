@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from "typerun/schema";
 
 /**
  * The `error` schema validates that the input is a JavaScript Error object. It is an alias for

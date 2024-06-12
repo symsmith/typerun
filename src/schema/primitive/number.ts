@@ -1,5 +1,5 @@
+import { custom } from "typerun/schema";
 import { getValidationErrorMessage } from "../../parse/errors";
-import { custom } from "./custom";
 
 /**
  * The `number` schema validates that the input is a number, and not `NaN`.

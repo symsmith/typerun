@@ -1,5 +1,5 @@
+import { custom } from "typerun/schema";
 import { getValidationErrorMessage, serialize } from "../../parse/errors";
-import { custom } from "./custom";
 
 /**
  * The `value` schema validates that the input is exactly any given literal value. This schema

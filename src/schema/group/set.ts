@@ -1,9 +1,8 @@
-import { validate } from "../../index";
+import { validate } from "typerun";
+import type { ParseError } from "typerun/parse";
+import { err, isErr, ok } from "typerun/result";
+import { instance, type Schema } from "typerun/schema";
 import { addPathToParseErrors } from "../../parse/errors";
-import type { ParseError } from "../../parse/types";
-import { err, isErr, ok } from "../../result/index";
-import { instance } from "../primitive/instance";
-import type { Schema } from "../types";
 
 /**
  * The `set` schema validates that the input is a set of elements that match the schema. It fails
