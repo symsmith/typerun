@@ -17,6 +17,7 @@ export { optional } from "./discriminated/optional";
 export { array } from "./group/array";
 export { object } from "./group/object";
 export { record } from "./group/record";
+export { set } from "./group/set";
 export { tuple } from "./group/tuple";
 
 export type { SchemaReturn as Infer, Schema } from "./types";

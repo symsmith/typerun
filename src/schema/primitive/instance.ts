@@ -1,5 +1,5 @@
-import { getValidationErrorMessage } from "parse/errors";
-import type { Schema } from "schema/types";
+import { getValidationErrorMessage } from "../../parse/errors";
+import type { Schema } from "../types";
 import { custom } from "./custom";
 
 /**

@@ -1,4 +1,4 @@
-import { getValidationErrorMessage } from "parse/errors";
+import { getValidationErrorMessage } from "../../parse/errors";
 import { custom } from "./custom";
 
 /**

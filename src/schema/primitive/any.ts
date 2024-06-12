@@ -1,5 +1,5 @@
-import type { Schema } from "schema/types";
-import { ok } from "typerun/result";
+import { ok } from "../../result/index";
+import type { Schema } from "../types";
 
 /**
  * The `any` schema validates that the input is of any type.

@@ -8,6 +8,7 @@ import {
   object,
   optional,
   record,
+  set,
   string,
   tuple,
   value,
@@ -329,5 +330,22 @@ describe("array", () => {
         },
       },
     });
+  });
+});
+
+describe("set", () => {
+  test("should validate a set of the correct elements", () => {
+    const schema = set(number);
+    expect(is(schema)(new Set([1, 2, 3]))).toBe(true);
+  });
+
+  test("should fail a set with a bad element", () => {
+    const schema = set(number);
+    expect(is(schema)(new Set([1, 2, "hello"]))).toBe(false);
+  });
+
+  test("should fail for something other than a set", () => {
+    const schema = set(number);
+    expect(is(schema)(true)).toBe(false);
   });
 });
