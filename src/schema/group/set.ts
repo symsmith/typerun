@@ -10,7 +10,7 @@ import { addPathToParseErrors } from "../../parse/errors";
  *
  * ## Example
  *
- *     import { set } from "typerun/schema";
+ *     import { set, number } from "typerun/schema";
  *     import { is } from "typerun";
  *
  *     const isSet = is(set(number))(new Set([1, 2, 3]));
@@ -37,7 +37,7 @@ export function set<S>(schema: Schema<S>): Schema<Set<S>> {
       setResult.data.forEach((v) => {
         const result = schema.validate(v);
         if (isErr(result)) {
-          errors.push(...addPathToParseErrors(result.errors, "element of set"));
+          errors.push(...addPathToParseErrors(result.errors, "element of Set"));
         }
       });
 

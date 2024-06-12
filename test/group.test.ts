@@ -4,6 +4,7 @@ import { isOk } from "typerun/result";
 import {
   array,
   either,
+  map,
   number,
   object,
   optional,
@@ -346,6 +347,52 @@ describe("set", () => {
 
   test("should fail for something other than a set", () => {
     const schema = set(number);
+    expect(is(schema)(true)).toBe(false);
+  });
+});
+
+describe("map", () => {
+  test("should validate a map of the correct elements", () => {
+    const schema = map(string, number);
+    expect(
+      is(schema)(
+        new Map([
+          ["a", 1],
+          ["b", 2],
+          ["c", 3],
+        ])
+      )
+    ).toBe(true);
+  });
+
+  test("should fail a map with a bad key", () => {
+    const schema = map(string, number);
+    expect(
+      is(schema)(
+        new Map<number | string, number>([
+          ["a", 1],
+          ["b", 2],
+          [4, 3],
+        ])
+      )
+    ).toBe(false);
+  });
+
+  test("should fail a map with a bad value", () => {
+    const schema = map(string, number);
+    expect(
+      is(schema)(
+        new Map<string, number | string>([
+          ["a", 1],
+          ["b", 2],
+          ["c", "hello"],
+        ])
+      )
+    ).toBe(false);
+  });
+
+  test("should fail for something other than a map", () => {
+    const schema = map(string, number);
     expect(is(schema)(true)).toBe(false);
   });
 });
